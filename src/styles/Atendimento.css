@@ -1,0 +1,42 @@
+.container-atendimento {
+  padding: 32px;
+}
+
+.titulo-atendimento {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.card-paciente {
+  background-color: #d1fae5; /* Verde claro */
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.card-paciente h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.botao-chamar {
+  background-color: #2563eb; /* Azul */
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.botao-chamar:hover {
+  background-color: #1d4ed8; /* Azul mais escuro no hover */
+}
+
+.texto-nenhum {
+  color: #374151; /* Cinza escuro */
+  font-size: 16px;
+}

@@ -4,6 +4,8 @@ import Triagem from "./pages/Triagem";
 import Atendimento from "./pages/Atendimento";
 import Painel from "./pages/Painel";
 import Header from "./components/Header";
+import ConsultaRemedios from "./pages/ConsultaRemedios";
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
           <Route path="/triagem" element={<Triagem />} />
           <Route path="/atendimento" element={<Atendimento />} />
           <Route path="/painel" element={<Painel />} />
+          <Route path="/consulta" element={<ConsultaRemedios />} />
         </Routes>
       </div>
     </BrowserRouter>

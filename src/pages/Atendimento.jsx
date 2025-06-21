@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../styles/Atendimento.css";
 
 function Atendimento() {
   const [fila, setFila] = useState([]);
@@ -30,24 +31,21 @@ function Atendimento() {
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6">Atendimento Médico</h2>
+    <div className="container-atendimento">
+      <h2 className="titulo-atendimento">Atendimento Médico</h2>
 
       {atual ? (
-        <div className="bg-green-100 p-6 rounded">
-          <h3 className="text-2xl font-bold mb-2">Paciente em Atendimento</h3>
+        <div className="card-paciente">
+          <h3>Paciente em Atendimento</h3>
           <p><strong>Nome:</strong> {atual.nome}</p>
           <p><strong>Motivo:</strong> {atual.motivo}</p>
           <p><strong>Prioridade:</strong> {atual.prioridade}</p>
         </div>
       ) : (
-        <p>Nenhum paciente em atendimento.</p>
+        <p className="texto-nenhum">Nenhum paciente em atendimento.</p>
       )}
 
-      <button
-        onClick={chamarProximo}
-        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-4"
-      >
+      <button onClick={chamarProximo} className="botao-chamar">
         Chamar Próximo
       </button>
     </div>
