@@ -1,0 +1,166 @@
+.triagem-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.triagem-container h2 {
+  color: #007BFF;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.triagem-container .subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.botoes-topo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.triagem-container button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.triagem-container button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Botões específicos */
+.logout-btn {
+  background-color: #dc3545; 
+}
+
+.limpar-btn {
+  background-color: #123b5f; 
+}
+
+.limpar-historico-btn {
+  background-color: #ffc107; 
+  color: #333;
+}
+
+.finalizar-btn {
+  background-color: #28a745; 
+  margin-top: 0.5rem;
+}
+
+.triagem-container h3 {
+  margin-top: 2rem;
+  color: #007BFF;
+  border-top: 2px solid #007BFF;
+  padding-top: 1rem;
+}
+
+.triagem-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.triagem-item {
+  border: 1px solid #ccc;
+  border-left: 10px solid rgb(128, 128, 128);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Cores das triagens */
+.triagem-item.vermelho {
+  border-left-color: #dc3545;
+}
+
+.triagem-item.amarelo {
+  border-left-color: #ffc107;
+}
+
+.triagem-item.verde {
+  border-left-color: #28a745;
+}
+
+.triagem-container select {
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid #cccccc5e;
+}
+
+/* Botão Chamar Próximo Paciente */
+.chamar-proximo-btn {
+  background-color: #32bcf3; 
+}
+
+/* Estilo para o nosso botão de Exportar para Excel */
+.exportar-excel-btn {
+  background-color: #28a745;
+}
+
+/* Para o container principal, precisamos que ele seja o "palco" para o botão "Sair" */
+.triagem-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  position: relative; /* Adicione esta linha */
+}
+
+/* Novo estilo para o container do botão Sair */
+.logout-button-container {
+  position: absolute; 
+  top: 20px;         
+  right: 20px; 
+  z-index: 10; 
+}
+
+.logout-btn {
+  background-color: #dc3545; 
+}
+
+/* --- Estilos para a Caixa de Busca --- */
+.busca-container {
+  margin-top: 1.5rem; 
+  margin-bottom: 2rem; 
+  text-align: center; 
+}
+
+.campo-busca {
+  width: 100%; 
+  max-width: 600px; 
+  padding: 0.8rem 1rem; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  font-size: 1rem; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.campo-busca::placeholder {
+  color: #888; 
+}
+
+.campo-busca:focus {
+  outline: none; 
+  border-color: #007BFF; 
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); 
+}
