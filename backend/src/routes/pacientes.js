@@ -1,11 +1,10 @@
 import express from 'express';
-import { PrismaClient } from '../prismaClient.js';
+import prisma from '../prismaClient.js';
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // Rota para criar um novo paciente
 
-routes.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     const { nome, motivo, prioridade } = req.body;
     const paciente = await prisma.paciente.create({
         data: {
@@ -19,18 +18,17 @@ routes.post('/', async (req, res) => {
 
 // Listar pacientes por prioridade
 
-routes.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     const pacientes = await prisma.paciente.findMany({
         where: { status: 'Aguardando' },
         orderBy: [{ prioridade: 'asc' }]
-    });
     });
     res.json(pacientes);
 });
 
 // Alterar status do paciente
 
-routes.patch('/:id/status', async (req, res) => {
+router.patch('/:id/status', async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     const paciente = await prisma.paciente.update({

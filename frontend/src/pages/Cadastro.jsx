@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import api from "../services/api";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -8,7 +9,7 @@ function Cadastro() {
   const [sucesso, setSucesso] = useState("");
   const inputNomeRef = useRef(null);
 
-  const handleCadastro = () => {
+  const handleCadastro = async () => {
     setErro("");
     setSucesso("");
 
@@ -20,7 +21,6 @@ function Cadastro() {
     const dataEntrada = new Date();
 
     const ficha = {
-      id: Date.now(),
       nome: nome.trim(),
       motivo: motivo.trim(),
       prioridade: prioridade,
@@ -28,15 +28,16 @@ function Cadastro() {
       horaEntrada: dataEntrada.toISOString(),
     };
 
-    const fila = JSON.parse(localStorage.getItem("fila")) || [];
-    fila.push(ficha);
-    localStorage.setItem("fila", JSON.stringify(fila));
-
-    setNome("");
-    setMotivo("");
-    setPrioridade("");
-    setSucesso(`✅ Paciente "${ficha.nome}" cadastrado com sucesso!`);
-    inputNomeRef.current.focus();
+    try {
+      await api.post("/pacientes", ficha); // Altere o endpoint conforme sua API
+      setNome("");
+      setMotivo("");
+      setPrioridade("");
+      setSucesso(`✅ Paciente "${ficha.nome}" cadastrado com sucesso!`);
+      inputNomeRef.current.focus();
+    } catch (err) {
+      setErro("Erro ao cadastrar paciente. Tente novamente.");
+    }
   };
 
   const handleKeyDown = (e) => {
