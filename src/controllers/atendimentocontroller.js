@@ -1,12 +1,10 @@
-// Importe a instância do Prisma Client que sua equipe configurou
 import prisma from '../prismaClient.js';
 
 export const buscarHistorico = async (req, res) => {
   try {
-    // 1. Pegar os filtros da URL (query params)
+
     const { nomePaciente, data, status } = req.query;
 
-    // 2. Montar o objeto de consulta para o Prisma
     const whereClause = {
       status: 'ATENDIDO', // Por padrão, o histórico é de quem já foi atendido
     };
