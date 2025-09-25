@@ -1,6 +1,7 @@
 import express from "express";
 import prisma from "../prismaClient.js";
 import { protect, authorize } from '../middleware/auth.js';
+import { buscarHistorico } from '../controllers/atendimento.controller.js';
 
 const router = express.Router();
 
@@ -42,5 +43,8 @@ router.post('/finalizar/:id', protect, authorize('MEDICO'), async (req, res) => 
 
   res.json(atendimento);
 });
+
+// Define a rota para o histórico
+router.get('/historico', buscarHistorico);
 
 export default router;
