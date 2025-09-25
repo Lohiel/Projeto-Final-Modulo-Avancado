@@ -1,11 +1,12 @@
 import express from 'express';
 import prisma from '../prismaClient.js';
+import { protect, authorize } from '../middleware/auth.js';
+
 const router = express.Router();
 
 // Rota para criar um novo paciente
 
-router.post('/', async (req, res) => {
-    console.log("BODY RECEBIDO:", req.body);
+router.post('/', protect, authorize('ATENDENTE'), async (req, res) => {
     const { nome, motivo, prioridade } = req.body;
     const paciente = await prisma.paciente.create({
         data: {
@@ -19,7 +20,7 @@ router.post('/', async (req, res) => {
 
 // Listar pacientes por prioridade
 
-router.get('/', async (req, res) => {
+router.get('/', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
     const pacientes = await prisma.paciente.findMany({
         where: { status: 'Aguardando Atendimento' },
         orderBy: [{ prioridade: 'asc' }]
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 
 // Alterar status do paciente
 
-router.patch('/:id/status', async (req, res) => {
+router.patch('/:id/status', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     const paciente = await prisma.paciente.update({

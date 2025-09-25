@@ -1,10 +1,13 @@
 import express from "express";
 import prisma from "../prismaClient.js";
+import { protect, authorize } from '../middleware/auth.js';
+
 const router = express.Router();
 
 // Iniciar atendimento
-router.post("/iniciar", async (req, res) => {
-  const { pacienteId, medicoId } = req.body;
+router.post('/iniciar', protect, authorize('MEDICO'), async (req, res) => {
+  const { pacienteId } = req.body;
+  const medicoId = req.user.id;
 
   // Atualiza status do paciente
   await prisma.paciente.update({
@@ -20,7 +23,7 @@ router.post("/iniciar", async (req, res) => {
 });
 
 // Finalizar atendimento
-router.post("/finalizar/:id", async (req, res) => {
+router.post('/finalizar/:id', protect, authorize('MEDICO'), async (req, res) => {
   const { id } = req.params;
 
   const atendimento = await prisma.atendimento.update({

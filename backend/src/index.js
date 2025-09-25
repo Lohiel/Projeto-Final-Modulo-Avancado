@@ -5,6 +5,8 @@ import { PrismaClient } from "@prisma/client";
 
 import atendimentosRouter from "./routes/atendimentos.js";
 import pacientesRouter from "./routes/pacientes.js";
+import medicosRouter from './routes/medicos.js';
+import authRouter from './routes/auth.js';
 
 dotenv.config();
 const app = express();
@@ -15,6 +17,8 @@ app.use(express.json());
 
 app.use("/atendimentos", atendimentosRouter);
 app.use("/pacientes", pacientesRouter);
+app.use("/medicos", medicosRouter);
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "API de Gestão de Consultas Médicas" });

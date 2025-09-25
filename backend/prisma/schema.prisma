@@ -15,24 +15,48 @@ datasource db {
 }
 
 model Paciente {
-  id       Int      @id @default(autoincrement())
-  nome      String
-  motivo  String
-  prioridade Int
-  status    String @default("Aguardando Atendimento")
-  createdAt DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  nome        String
+  motivo      String
+  prioridade  Int
+  status      String   @default("Aguardando Atendimento")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   atendimentos Atendimento[]
 }
 
 model Atendimento {
-  id         Int      @id @default(autoincrement())
-  pacienteId Int
-  medicoId  Int
-  status     String @default("Em Andamento")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  paciente   Paciente @relation(fields: [pacienteId], references: [id])
+  id          Int      @id @default(autoincrement())
+  pacienteId  Int
+  medicoId    Int
+  status      String   @default("Em Andamento")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  paciente    Paciente @relation(fields: [pacienteId], references: [id])
+  medico      Medico   @relation(fields: [medicoId], references: [id])
   @@index([pacienteId])
   @@index([medicoId])
+}
+
+model Medico {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  role      String   @default("MEDICO")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  atendimentos Atendimento[] // Relação com atendimentos
+}
+
+// Novo Modelo para Atendente
+model Atendente {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  // Adicione um campo de permissão
+  role      String   @default("ATENDENTE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
