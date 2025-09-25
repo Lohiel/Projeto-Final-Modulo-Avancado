@@ -27,7 +27,7 @@ router.post("/finalizar/:id", async (req, res) => {
     where: { id: Number(id) },
     data: {
       status: "finalizado",
-      finalizadoEm: new Date()
+      updatedAt: new Date()
     }
   });
 

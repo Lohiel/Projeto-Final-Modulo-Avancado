@@ -17,7 +17,8 @@ datasource db {
 model Paciente {
   id       Int      @id @default(autoincrement())
   nome      String
-  prioridade String
+  motivo  String
+  prioridade Int
   status    String @default("Aguardando Atendimento")
   createdAt DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -27,10 +28,11 @@ model Paciente {
 model Atendimento {
   id         Int      @id @default(autoincrement())
   pacienteId Int
-  descricao  String
+  medicoId  Int
   status     String @default("Em Andamento")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   paciente   Paciente @relation(fields: [pacienteId], references: [id])
   @@index([pacienteId])
+  @@index([medicoId])
 }

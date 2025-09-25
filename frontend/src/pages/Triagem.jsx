@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
+import api from "../services/api";
 
 function Triagem() {
   const [fila, setFila] = useState([]);
 
   useEffect(() => {
-    const dados = JSON.parse(localStorage.getItem("fila")) || [];
-    setFila(ordenarFila(dados));
+    const fetchFila = async () => {
+      const response = await api.get("/pacientes");
+      setFila(ordenarFila(response.data));
+    };
+
+    fetchFila();
 
     const interval = setInterval(() => {
-      const atualizaFila = JSON.parse(localStorage.getItem("fila")) || [];
-      setFila(ordenarFila(atualizaFila));
+      fetchFila();
     }, 60000); // Atualiza a cada 1 minuto
 
     return () => clearInterval(interval);
