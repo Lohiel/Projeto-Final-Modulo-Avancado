@@ -1,7 +1,7 @@
 import express from "express";
 import prisma from "../prismaClient.js";
 import { protect, authorize } from '../middleware/auth.js';
-import { buscarHistorico } from '../controllers/atendimento.controller.js';
+import { buscarHistorico } from '../controllers/atendimentocontroller.js';
 
 const router = express.Router();
 
