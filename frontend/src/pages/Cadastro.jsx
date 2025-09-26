@@ -23,9 +23,9 @@ function Cadastro() {
     const ficha = {
       nome: nome.trim(),
       motivo: motivo.trim(),
-      prioridade: prioridade,
-      status: "Aguardando",
-      horaEntrada: dataEntrada.toISOString(),
+      prioridade: Number(prioridade),
+      //status: "Aguardando",
+      //horaEntrada: dataEntrada.toISOString(),
     };
 
     try {
@@ -71,9 +71,9 @@ function Cadastro() {
           onChange={(e) => setPrioridade(e.target.value)}
         >
           <option value="">Selecione a Prioridade</option>
-          <option value="vermelho">🔴 Vermelho - Emergência</option>
-          <option value="amarelo">🟡 Amarelo - Moderado</option>
-          <option value="verde">🟢 Verde - Leve</option>
+        <option value="1">🔴 Vermelho - Emergência</option>
+        <option value="2">🟡 Amarelo - Moderado</option>
+        <option value="3">🟢 Verde - Leve</option>
         </select>
 
         <button
