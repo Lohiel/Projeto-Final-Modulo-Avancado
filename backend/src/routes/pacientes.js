@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Rota para criar um novo paciente
 
-router.post('/', protect, authorize('ATENDENTE'), async (req, res) => {
+router.post('/', async (req, res) => {
     const { nome, motivo, prioridade } = req.body;
     const paciente = await prisma.paciente.create({
         data: {
@@ -20,7 +20,7 @@ router.post('/', protect, authorize('ATENDENTE'), async (req, res) => {
 
 // Listar pacientes por prioridade
 
-router.get('/', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
+router.get('/', async (req, res) => {
     const pacientes = await prisma.paciente.findMany({
         where: { status: 'Aguardando Atendimento' },
         orderBy: [{ prioridade: 'asc' }]
@@ -30,7 +30,7 @@ router.get('/', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
 
 // Alterar status do paciente
 
-router.patch('/:id/status', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
+router.patch('/:id/status', async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     const paciente = await prisma.paciente.update({
@@ -38,6 +38,13 @@ router.patch('/:id/status', protect, authorize('MEDICO', 'ATENDENTE'), async (re
         data: { status }
     });
     res.json(paciente);
+});
+
+router.patch('/resetar-fila', async (req, res) => {
+    const pacientes = await prisma.paciente.updateMany({
+        data: { status: 'Aguardando Atendimento' },
+    });
+    res.json({ message: 'Fila resetada', count: pacientes.count });
 });
 
 export default router;

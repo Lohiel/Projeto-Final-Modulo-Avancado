@@ -6,7 +6,7 @@ import { protect, authorize } from '../middleware/auth.js';
 const router = express.Router();
 
 // POST /medicos (Apenas Atendentes)
-router.post('/', protect, authorize('ATENDENTE'), async (req, res) => {
+router.post('/', async (req, res) => {
   const { nome, email, senha } = req.body;
   const hashedPassword = await bcrypt.hash(senha, 10);
 
@@ -26,7 +26,7 @@ router.post('/', protect, authorize('ATENDENTE'), async (req, res) => {
 });
 
 // GET /medicos (Médicos e Atendentes)
-router.get('/', protect, authorize('MEDICO', 'ATENDENTE'), async (req, res) => {
+router.get('/', async (req, res) => {
   const medicos = await prisma.medico.findMany({
     select: { id: true, nome: true, email: true }
   });

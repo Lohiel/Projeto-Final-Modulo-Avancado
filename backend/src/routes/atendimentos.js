@@ -6,7 +6,7 @@ import { buscarHistorico } from '../controllers/atendimentocontroller.js';
 const router = express.Router();
 
 // Iniciar atendimento
-router.post('/iniciar', protect, authorize('MEDICO'), async (req, res) => {
+router.post('/iniciar', async (req, res) => {
   const { pacienteId } = req.body;
   const medicoId = req.user.id;
 
@@ -24,7 +24,7 @@ router.post('/iniciar', protect, authorize('MEDICO'), async (req, res) => {
 });
 
 // Finalizar atendimento
-router.post('/finalizar/:id', protect, authorize('MEDICO'), async (req, res) => {
+router.post('/finalizar/:id', async (req, res) => {
   const { id } = req.params;
 
   const atendimento = await prisma.atendimento.update({
